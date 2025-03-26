@@ -58,7 +58,7 @@ const WeatherDisplay = () => {
       if (!defaultCity || !apiKey) return null;
       try {
         const response = await fetch(
-          `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${defaultCity.lat},${defaultCity.lon}&days=7&aqi=yes&lang=zh`,
+          `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${defaultCity.lat},${defaultCity.lon}&days=3&aqi=yes&lang=zh`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -240,8 +240,8 @@ const WeatherDisplay = () => {
       </div>
 
       <div className="forecast mt-8">
-        <h3 className="text-xl font-semibold mb-4">7天預報</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 md:gap-4">
+        <h3 className="text-xl font-semibold mb-4">3天預報</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
           {weather?.daily.map((day) => (
             <div key={day.date} className="text-center p-3 bg-gray-50 rounded-lg">
               <p className="font-semibold">{format(new Date(day.date), 'EEE')}</p>
