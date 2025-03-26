@@ -13,13 +13,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
         <div className="container mx-auto px-4 py-8">
-          <header className="text-center mb-8 relative">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Cloud className="w-10 h-10 text-white" />
-              <h1 className="text-4xl font-bold text-white">Air Weather Pro</h1>
+          <header className="text-center mb-8">
+            <div className="relative flex flex-col items-center">
+              <ApiKeySetup />
+              <div className="flex items-center justify-center gap-2 mb-4 mt-8 md:mt-4">
+                <Cloud className="w-10 h-10 text-white" />
+                <h1 className="text-4xl font-bold text-white">Air Weather Pro</h1>
+              </div>
+              <CitySearch />
             </div>
-            <ApiKeySetup />
-            <CitySearch />
           </header>
           
           <main>

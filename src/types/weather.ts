@@ -16,9 +16,9 @@ export interface WeatherData {
 }
 
 export interface AirQuality {
-  aqi: number;
   pm25: number;
-  status: 'Good' | 'Moderate' | 'Poor' | 'Very Poor' | 'Hazardous';
+  status: string;
+  color: string;
 }
 
 export interface City {
