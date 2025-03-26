@@ -5,6 +5,7 @@ export interface WeatherData {
     windSpeed: number;
     condition: string;
     icon: string;
+    precipChance: number;
   };
   daily: Array<{
     date: string;
@@ -12,6 +13,7 @@ export interface WeatherData {
     tempMin: number;
     condition: string;
     icon: string;
+    precipChance: number;
   }>;
 }
 

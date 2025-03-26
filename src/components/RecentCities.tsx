@@ -2,6 +2,40 @@ import React from 'react';
 import { Clock, Star, X } from 'lucide-react';
 import { useWeatherStore } from '../store/weatherStore';
 
+// 簡體轉繁體對照表
+const simplifiedToTraditional: { [key: string]: string } = {
+  '台湾': '台灣',
+  '高雄市': '高雄市',
+  '台北市': '台北市',
+  '台中市': '台中市',
+  '基隆市': '基隆市',
+  '台南市': '台南市',
+  '新竹市': '新竹市',
+  '嘉义市': '嘉義市',
+  '新北市': '新北市',
+  '桃园市': '桃園市',
+  '新竹县': '新竹縣',
+  '苗栗县': '苗栗縣',
+  '彰化县': '彰化縣',
+  '南投县': '南投縣',
+  '云林县': '雲林縣',
+  '嘉义县': '嘉義縣',
+  '屏东县': '屏東縣',
+  '宜兰县': '宜蘭縣',
+  '花莲县': '花蓮縣',
+  '台东县': '台東縣',
+  '澎湖县': '澎湖縣',
+  '金门县': '金門縣',
+  '连江县': '連江縣',
+};
+
+const convertToTraditional = (text: string): string => {
+  return text.split(/[,，]/).map(part => {
+    const trimmed = part.trim();
+    return simplifiedToTraditional[trimmed] || trimmed;
+  }).join(', ');
+};
+
 const RecentCities = () => {
   const { recentCities, favoritesCities, setDefaultCity, toggleFavorite, removeRecentCity } = useWeatherStore();
 
@@ -26,7 +60,7 @@ const RecentCities = () => {
                 onClick={() => handleCityClick(city)}
                 className="flex-1 text-left"
               >
-                {city.name}
+                {convertToTraditional(city.name)}
               </button>
               <div className="flex items-center gap-2">
                 <button
@@ -76,7 +110,7 @@ const RecentCities = () => {
               onClick={() => handleCityClick(city)}
               className="w-full flex items-center justify-between p-3 bg-white bg-opacity-10 rounded-lg text-white hover:bg-opacity-20 transition-colors"
             >
-              <span>{city.name}</span>
+              <span>{convertToTraditional(city.name)}</span>
               <Star
                 className="w-5 h-5 fill-yellow-400 text-yellow-400"
                 onClick={(e) => {
