@@ -1,4 +1,5 @@
 # Air Weather Pro 天氣與空氣品質查詢系統
+![image](https://github.com/user-attachments/assets/38728b61-3d98-4416-9eab-422412c37bfc)
 
 這是一個專業的天氣與空氣品質查詢網頁應用程式，提供即時天氣資訊、空氣品質指標以及未來天氣預報功能。
 
