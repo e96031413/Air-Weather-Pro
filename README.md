@@ -1,5 +1,6 @@
 # Air Weather Pro 天氣與空氣品質查詢系統
-![image](https://github.com/user-attachments/assets/38728b61-3d98-4416-9eab-422412c37bfc)
+![image](https://github.com/user-attachments/assets/dd1e814f-d488-4762-af51-2056590968a7)
+
 
 這是一個專業的天氣與空氣品質查詢網頁應用程式，提供即時天氣資訊、空氣品質指標以及未來天氣預報功能。使用 React 和 TypeScript 開發，具備完整的 PWA 支援，可安裝於各種裝置使用。
 
@@ -59,7 +60,7 @@
 ### 本地開發
 1. 複製專案
 ```bash
-git clone <專案網址>
+git clone https://github.com/e96031413/Air-Weather-Pro
 ```
 
 2. 安裝依賴
