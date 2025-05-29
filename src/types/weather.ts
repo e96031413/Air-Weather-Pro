@@ -1,12 +1,22 @@
 export interface WeatherData {
   current: {
     temp: number;
+    feelsLike: number;
     humidity: number;
     windSpeed: number;
+    uvIndex: number;
     condition: string;
     icon: string;
     precipChance: number;
+    sunrise: string;
+    sunset: string;
   };
+  hourly: Array<{
+    time: string;
+    temp: number;
+    icon: string;
+    chanceOfRain: number;
+  }>;
   daily: Array<{
     date: string;
     tempMax: number;

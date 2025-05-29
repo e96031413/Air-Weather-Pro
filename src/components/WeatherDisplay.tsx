@@ -1,7 +1,17 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { format } from 'date-fns';
-import { Sun, Cloud, Wind, Droplets, Key, CloudRain } from 'lucide-react';
+import {
+  Sun,
+  Cloud,
+  Wind,
+  Droplets,
+  Key,
+  CloudRain,
+  Thermometer,
+  Sunrise,
+  Sunset,
+} from 'lucide-react';
 import { useWeatherStore } from '../store/weatherStore';
 import type { WeatherData, AirQuality } from '../types/weather';
 
@@ -74,12 +84,22 @@ const WeatherDisplay = () => {
         return {
           current: {
             temp: data.current.temp_c,
+            feelsLike: data.current.feelslike_c,
             humidity: data.current.humidity,
             windSpeed: data.current.wind_kph,
+            uvIndex: data.current.uv,
             condition: convertToTraditional(data.current.condition.text),
             icon: data.current.condition.icon.replace('http:', 'https:'),
             precipChance: data.forecast.forecastday[0].day.daily_chance_of_rain,
+            sunrise: data.forecast.forecastday[0].astro.sunrise,
+            sunset: data.forecast.forecastday[0].astro.sunset,
           },
+          hourly: data.forecast.forecastday[0].hour.slice(0, 24).map((h: any) => ({
+            time: h.time,
+            temp: h.temp_c,
+            icon: h.condition.icon.replace('http:', 'https:'),
+            chanceOfRain: h.chance_of_rain,
+          })),
           daily: data.forecast.forecastday.map((day: any) => ({
             date: day.date,
             tempMax: day.day.maxtemp_c,
@@ -221,7 +241,23 @@ const WeatherDisplay = () => {
                 </div>
                 <div className="flex items-center gap-1">
                   <CloudRain className="w-4 h-4" />
-                  <span>降雨機率 {weather?.current.precipChance}%</span>
+                  <span>降雨 {weather?.current.precipChance}%</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Thermometer className="w-4 h-4" />
+                  <span>體感 {weather?.current.feelsLike}°C</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Sun className="w-4 h-4" />
+                  <span>UV {weather?.current.uvIndex}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Sunrise className="w-4 h-4" />
+                  <span>{weather?.current.sunrise}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Sunset className="w-4 h-4" />
+                  <span>{weather?.current.sunset}</span>
                 </div>
               </div>
             </div>
@@ -253,6 +289,20 @@ const WeatherDisplay = () => {
                 <CloudRain className="w-3 h-3" />
                 <span>{day.precipChance}%</span>
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="hourly mt-8">
+        <h3 className="text-xl font-semibold mb-4">24小時預報</h3>
+        <div className="flex overflow-x-auto gap-2">
+          {weather?.hourly.map((hour) => (
+            <div key={hour.time} className="min-w-[72px] text-center bg-gray-50 rounded-lg p-2">
+              <p className="text-xs">{format(new Date(hour.time), 'HH:mm')}</p>
+              <img src={hour.icon} alt="" className="w-8 h-8 mx-auto my-1" />
+              <p className="text-sm">{hour.temp}°</p>
+              <p className="text-xs text-gray-600">{hour.chanceOfRain}%</p>
             </div>
           ))}
         </div>
